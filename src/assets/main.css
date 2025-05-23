@@ -1,1 +1,12 @@
 @import 'tailwindcss';
+@import 'flowbite/src/themes/default';
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+@theme {
+  --color-desert-light: #fbdb93;
+  --color-desert-meduim: #be5b50;
+  --color-desert-medium-dark: #8a2d3b;
+  --color-desert-dark: #641b2e;
+  --color-cactus-medium: #9ebc8a;
+}
