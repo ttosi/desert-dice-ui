@@ -1,9 +1,10 @@
 @import 'tailwindcss';
 @import 'flowbite/src/themes/default';
-@plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
+@plugin "flowbite/plugin";
 
 @theme {
+  --font-display: 'Manrope';
   --color-desert-light: #fbdb93;
   --color-desert-meduim: #be5b50;
   --color-desert-medium-dark: #8a2d3b;

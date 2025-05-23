@@ -1,13 +1,12 @@
 <script setup>
-import { RouterView, RouterLink } from 'vue-router'
-import SiteHeader from './components/SiteHeader.vue'
-import SiteFooter from './components/SiteFooter.vue'
+import { RouterView, RouterLink } from 'vue-router';
+import SiteHeader from './components/SiteHeader.vue';
+import SiteFooter from './components/SiteFooter.vue';
 </script>
 
 <template>
   <div class="flex flex-col h-screen">
-    <SiteHeader class="sticky top-0" />
-    <RouterLink to="/">Home</RouterLink>
+    <SiteHeader class="sticky top-0 z-50" />
     <RouterView class="flex-grow w-full" />
     <SiteFooter />
   </div>
