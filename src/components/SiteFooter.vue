@@ -28,12 +28,12 @@
           <div class="font-bold">Bluesky</div>
         </div>
       </a>
-      <!-- <a href="#">
+      <a href="#">
         <div class="flex items-center">
           <img src="@/assets/logos/x.svg" class="w-8 mr-2" />
           <div class="font-bold">X</div>
         </div>
-      </a> -->
+      </a>
       <a href="#">
         <div class="flex items-center">
           <img src="@/assets/logos/youtube.svg" class="w-8 mr-2" />

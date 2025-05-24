@@ -18,10 +18,10 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   title: String,
   category: String,
-  size: String,
+  count: String,
 });
 
 /* featured mock data */
@@ -30,10 +30,6 @@ const featured = [
   { id: 2, name: 'Cool Dice Name 2', path: 'dice/20250316_143711.jpg' },
   { id: 3, name: 'Cool Dice Name 3', path: 'dice/20250102_162901.jpg' },
 ];
-
-console.log(`@/assets/${featured[0].path}`);
-
-console.log(props.title);
 </script>
 
 <style lang="scss" scoped></style>
