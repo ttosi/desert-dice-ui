@@ -22,7 +22,7 @@
             <a href="#" class="menu-item">DICE BOXES</a>
           </li>
           <li class="hover:text-desert-meduim">
-            <a href="#" class="menu-item">JEWERLY</a>
+            <a href="#" class="menu-item">JEWELRY</a>
           </li>
           <li class="hover:text-desert-meduim">
             <a href="#" class="menu-item"><mdicon name="cart" size="25" /></a>
