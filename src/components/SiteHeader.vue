@@ -3,7 +3,7 @@
     <div
       class="font-[Cinzel] text-desert-light max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
       <div class="flex items-center">
-        <div><img src="@/assets/g6-5.svg" /></div>
+        <div><img src="@/assets/logos/small_saguaro.svg" /></div>
         <div class="text-desert-meduim-dark font-bold text-2xl -ml-2.5">Desert Dice Company</div>
       </div>
       <button
@@ -23,6 +23,9 @@
           </li>
           <li class="hover:text-desert-meduim">
             <a href="#" class="menu-item">JEWELRY</a>
+          </li>
+          <li class="hover:text-desert-meduim">
+            <a href="#" class="menu-item">CUSTOM SETS</a>
           </li>
           <li class="hover:text-desert-meduim">
             <a href="#" class="menu-item"><mdicon name="cart" size="25" /></a>
