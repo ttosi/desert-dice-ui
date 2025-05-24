@@ -2,11 +2,19 @@
   <section>
     <div class="carousel__wrapper">
       <Carousel v-bind="carouselConfig">
-        <Slide><img class="w-full" src="@/assets/20250523_115502.jpg" /></Slide>
+        <Slide>
+          <div>
+            <img class="w-full" src="@/assets/20250523_115502.jpg" />
+            <div class="font-[Cinzel] font-bold absolute top-6 left-6 text-3xl text-desert-light">
+              <div>High Quality</div>
+              <div class="ml-3.5">Epoxy Resin Dice</div>
+            </div>
+          </div>
+        </Slide>
         <Slide><img class="w-full" src="@/assets/1000000712.png" /></Slide>
-        <Slide><img class="w-full" src="@/assets/1000000714.png" /></Slide>
+        <!-- <Slide><img class="w-full" src="@/assets/1000000714.png" /></Slide>
         <Slide><img class="w-full" src="@/assets/1000000713.png" /></Slide>
-        <Slide><img class="w-full" src="@/assets/1000000716.png" /></Slide>
+        <Slide><img class="w-full" src="@/assets/1000000716.png" /></Slide> -->
         <template #addons>
           <Navigation />
         </template>
@@ -15,7 +23,9 @@
   </section>
   <section id="product-banners" class="mx-24 mt-8">
     <div class="container mx-auto">
-      <div class="font-bold text-2xl mb-2">Featured Dice</div>
+      <div class="font-[Ceinzel] font-bold text-desert-medium-dark text-2xl mb-2">
+        FEATURED DICE
+      </div>
       <div class="flex flex-wrap">
         <!-- Category 1 -->
         <div class="w-full sm:w-1/3 px-4 mb-8">
@@ -70,7 +80,7 @@
   </section>
   <section id="product-banners" class="mx-24">
     <div class="container mx-auto">
-      <div class="font-bold text-2xl mb-2">Latest Dice</div>
+      <div class="font-[Cinzel] font-bold text-desert-medium-dark text-2xl mb-2">LATEST DICE</div>
       <div class="flex flex-wrap">
         <!-- Category 1 -->
         <div class="w-full sm:w-1/3 px-4 mb-8">
@@ -133,7 +143,6 @@ const carouselConfig = {
   itemsToShow: 1,
   gap: 5,
   snapAlign: 'center',
-  autoplay: 4000,
   wrapAround: true,
   pauseAutoplayOnHover: false,
   breakpointMode: 'viewport',
