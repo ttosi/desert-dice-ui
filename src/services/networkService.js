@@ -17,11 +17,13 @@ const useSecureFetch = createFetch({
   },
 });
 
-const get = async (endpoint) => {
-  const { data } = await useSecureFetch(`${baseUrl}/${endpoint}`);
-  console.debug(data.value);
+const network = {
+  async get(endpoint) {
+    const { data } = await useSecureFetch(`${baseUrl}/${endpoint}`);
+    return JSON.parse(data.value);
+  },
 };
 
-const post = async () => {};
+// const post = async () => {};
 
-export { get, post };
+export { network };

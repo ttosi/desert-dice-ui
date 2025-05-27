@@ -2,10 +2,12 @@
   <header class="bg-desert-dark">
     <div
       class="font-[Cinzel] text-desert-light max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
-      <div class="flex items-center">
-        <div><img src="@/assets/logos/small_saguaro.svg" /></div>
-        <div class="text-desert-meduim-dark font-bold text-2xl -ml-2.5">Desert Dice Company</div>
-      </div>
+      <RouterLink to="/#">
+        <div class="flex items-center">
+          <div><img src="@/assets/logos/small_saguaro.svg" /></div>
+          <div class="text-desert-meduim-dark font-bold text-2xl -ml-2.5">Desert Dice Company</div>
+        </div>
+      </RouterLink>
       <button
         data-collapse-toggle="navbar-default"
         type="button"
@@ -14,14 +16,14 @@
       </button>
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
         <ul class="menu">
-          <li class="menu-item" v-for="item in menuItems" :key="item.id">
-            <a :href="item.route">{{ item.name }}</a>
+          <li class="menu-item" v-for="category in categories" :key="category.id">
+            <RouterLink :to="`/products/${category.code}`">{{ category.name }}</RouterLink>
           </li>
           <li class="menu-item">
-            <a href="#">CUSTOM SETS</a>
+            <RouterLink to="/#">CUSTOM SETS</RouterLink>
           </li>
           <li class="menu-item">
-            <a href="#"><mdicon name="cart" size="25" /></a>
+            <RouterLink to="/#"><mdicon name="cart" size="25" /></RouterLink>
           </li>
         </ul>
       </div>
@@ -30,11 +32,15 @@
 </template>
 
 <script setup>
-const menuItems = [
-  { id: 1, name: 'Dice', route: '' },
-  { id: 2, name: 'Dice Cases', route: '' },
-  { id: 3, name: 'Jewelry', route: '' },
-];
+import { ref, onMounted } from 'vue';
+import { RouterLink } from 'vue-router';
+import { getLookupByKey } from '@/services/lookupsService';
+
+const categories = ref();
+
+onMounted(async () => {
+  categories.value = getLookupByKey('productcategory');
+});
 </script>
 
 <style scoped></style>

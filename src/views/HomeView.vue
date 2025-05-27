@@ -14,8 +14,8 @@
 import ProductCarousel from '@/components/ProductCarousel.vue';
 import ProductBanner from '@/components/ProductBanner.vue';
 
-import { get } from '@/services/networkService';
-get('products');
+// import { get } from '@/services/networkService';
+// get('products');
 </script>
 
 <style scoped></style>
