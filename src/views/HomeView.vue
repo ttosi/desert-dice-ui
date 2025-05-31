@@ -3,10 +3,10 @@
     <ProductCarousel />
   </section>
   <section id="product-banners" class="mx-24 mt-8">
-    <ProductBanner title="featured dice" category="1" />
+    <ProductBanner title="featured dice" category="dice" />
   </section>
   <section id="product-banners" class="mx-24">
-    <ProductBanner title="latest dice" category="2" />
+    <ProductBanner title="latest dice" category="dice" />
   </section>
 </template>
 

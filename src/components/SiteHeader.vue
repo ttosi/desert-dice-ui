@@ -11,16 +11,13 @@
       <button
         data-collapse-toggle="navbar-default"
         type="button"
-        class="inline-flex items-center p-2 justify-center md:hidden focus:outline-none">
+        class="inline-flex items-center p-2 justify-center lg:hidden focus:outline-none">
         <mdicon name="menu" size="30" />
       </button>
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <div class="hidden w-full lg:block lg:w-auto" id="navbar-default">
         <ul class="menu">
           <li class="menu-item" v-for="category in categories" :key="category.id">
-            <RouterLink :to="`/products/${category.code}`">{{ category.name }}</RouterLink>
-          </li>
-          <li class="menu-item">
-            <RouterLink to="/#">CUSTOM SETS</RouterLink>
+            <RouterLink :to="`/products/${category.route}`">{{ category.name }}</RouterLink>
           </li>
           <li class="menu-item">
             <RouterLink to="/#"><mdicon name="cart" size="25" /></RouterLink>
@@ -32,14 +29,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
 import { RouterLink } from 'vue-router';
-import { getLookupByKey } from '@/services/lookupsService';
+import { useProductStore } from '@/stores/productStore';
 
-const categories = ref();
+const productStore = useProductStore();
+const { categories } = storeToRefs(productStore);
+const { getProductCategories } = productStore;
 
 onMounted(async () => {
-  categories.value = getLookupByKey('productcategory');
+  await getProductCategories();
 });
 </script>
 

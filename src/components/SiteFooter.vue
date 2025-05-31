@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="mt-8">
     <div class="flex justify-center">
       <div class="py-3 border-t border-slate-400 w-2/3"></div>
     </div>
