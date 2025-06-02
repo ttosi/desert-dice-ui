@@ -31,7 +31,7 @@
 }
 
 .thumbnail-active {
-  @apply ring-2 ring-desert-dark ring-offset-2;
+  @apply ring-2 ring-desert-dark ring-offset-2 rounded-md;
 }
 
 select {

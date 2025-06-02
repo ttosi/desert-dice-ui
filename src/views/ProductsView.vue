@@ -18,12 +18,12 @@
               class="bg-white p-4 rounded-lg shadow shadow-slate-400">
               <RouterLink :to="`/product/${product.id}`">
                 <img
-                  :src="`${imageBaseUrl}/${product.coverImage}`"
-                  class="w-full object-cover mb-4 rounded-lg" />
+                  :src="`${imageBaseUrl}/${product.coverImagePath}`"
+                  class="w-full object-cover mb-4 rounded-lg max-h-96" />
               </RouterLink>
               <div class="text-lg font-semibold">{{ product.name }}</div>
               <div class="flex items-center mb-4">
-                <span class="text-lg text-primary">${{ product?.price.toFixed(2) }}</span>
+                <span class="text-lg text-primary">${{ product?.coverPrice.toFixed(2) }}</span>
               </div>
               <RouterLink :to="`/product/${product.id}`">
                 <button type="button" class="button-primary">View Details</button>
@@ -62,7 +62,8 @@ const currentCategory = computed(() => {
 
 watchEffect(async () => {
   await getProductsByCategory(route.params.category);
+  console.log(products);
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

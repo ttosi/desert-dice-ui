@@ -20,7 +20,10 @@
             <RouterLink :to="`/products/${category.route}`">{{ category.name }}</RouterLink>
           </li>
           <li class="menu-item">
-            <RouterLink to="/#"><mdicon name="cart" size="25" /></RouterLink>
+            <RouterLink to="/#" class="relative">
+              <mdicon name="numeric-1-circle" class="absolute -top-3 -right-2.5" />
+              <mdicon name="cart" size="27" />
+            </RouterLink>
           </li>
         </ul>
       </div>
