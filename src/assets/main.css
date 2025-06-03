@@ -1,7 +1,4 @@
 @import 'tailwindcss';
-@import 'flowbite/src/themes/default';
-@source "../node_modules/flowbite";
-@plugin "flowbite/plugin";
 
 @theme {
   --font-display: 'Manrope';
@@ -10,14 +7,6 @@
   --color-desert-medium-dark: #8a2d3b;
   --color-desert-dark: #641b2e;
   --color-cactus-medium: #9ebc8a;
-}
-
-.menu {
-  @apply font-bold text-lg flex p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0;
-}
-
-.menu-item {
-  @apply uppercase block py-2 px-3 rounded-sm md:p-0 hover:text-desert-meduim;
 }
 
 .button-primary {
