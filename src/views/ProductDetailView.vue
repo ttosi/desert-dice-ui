@@ -1,14 +1,16 @@
 <template>
-  <section id="product-info">
+  <section>
     <div v-if="product" class="container mx-auto mt-3">
       <div class="py-6">
         <div class="flex flex-col lg:flex-row gap-6">
-          <div class="w-full lg:w-2/5">
+          <div class="">
             <div class="grid gap-4">
-              <div id="main-image-container" class="rounded-xl shadow shadow-slate-400">
+              <div
+                id="main-image-container"
+                class="max-w-[500px] rounded-lg shadow shadow-slate-400">
                 <img
                   ref="mainImage"
-                  class="h-auto w-full max-w-[500px] rounded-xl object-cover object-center md:h-[480px]"
+                  class="h-auto w-full max-w-[500px] rounded-lg object-cover object-center md:h-[480px]"
                   style="padding: 5px"
                   :src="`${imageBaseUrl}/${product?.images[0]}`"
                   alt="Main Product Image" />
@@ -28,7 +30,7 @@
               </div>
             </div>
           </div>
-          <div class="w-full lg:w-3/5 flex flex-col justify-between">
+          <div class="w-full lg:w-full flex flex-col justify-between">
             <div class="pb-8">
               <h1 class="font-[Cinzel] text-desert-dark text-3xl font-bold mb-4">
                 {{ product.name }}
@@ -73,7 +75,7 @@
         <template v-slot:actions>
           <div class="text-desert-light flex justify-center font-bold ml-3 mr-3">
             <mdicon class="text-cactus-medium mr-2" name="check-decagram" />
-            {{ product.name }} Added To Cart!
+            Awesome! Item has been added to your cart
           </div>
           <v-btn class="bg-desert-light" color="desert-dark" variant="tonal" to="/cart">
             Go To Cart

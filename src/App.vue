@@ -8,7 +8,7 @@ import SiteFooter from './components/SiteFooter.vue';
   <!-- <div class="flex flex-col h-screen"> -->
   <v-app>
     <SiteHeader />
-    <main class="flex-grow w-full mt-16"><RouterView /></main>
+    <main class="flex-grow w-full mt-16 px-5"><RouterView /></main>
     <SiteFooter />
   </v-app>
   <!-- </div> -->

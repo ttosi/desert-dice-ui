@@ -1,4 +1,7 @@
 node_modules
+.env*
+!.env.template
 dist
 coverage
-.env
+*.zip
+

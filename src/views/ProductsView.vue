@@ -33,7 +33,10 @@
             </div>
           </div>
           <div v-else>
-            <div class="mt-3 mb-4">There are currently no items in this category</div>
+            <div class="mt-3 mb-4">
+              Nothing here right now! Check back, or even better, sign up to get notified. You won't
+              be dissapointed.
+            </div>
             <button type="button" class="button-primary">
               Notify Me When Products Become Available
             </button>
@@ -64,7 +67,7 @@ const currentCategory = computed(() => {
 
 watchEffect(async () => {
   await getProductsByCategory(route.params.category);
-  console.log(products);
+  console.log(products.value);
 });
 </script>
 

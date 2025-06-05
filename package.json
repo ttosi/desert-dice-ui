@@ -4,23 +4,21 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "test:unit": "vitest",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "dev": "vite --mode development",
+    "build:staging": "vite build --mode staging",
+    "build": "vite build --mode production"
   },
   "dependencies": {
     "@mdi/js": "^7.4.47",
+    "@stripe/stripe-js": "^7.3.1",
     "@tailwindcss/vite": "^4.1.7",
-    "@vue-stripe/vue-stripe": "^4.5.0",
     "@vueuse/core": "^13.2.0",
     "mdi-vue": "^3.0.13",
     "pinia": "^3.0.1",
     "tailwind-merge": "^3.3.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
+    "vue-stripe-js": "^2.0.2",
     "vue3-carousel": "^0.15.1",
     "vuetify": "^3.8.7"
   },
