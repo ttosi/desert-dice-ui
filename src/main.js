@@ -11,6 +11,8 @@ import * as mdijs from '@mdi/js';
 
 const app = createApp(App);
 
+console.log('mode', import.meta.env.VITE_API_BASE_URL);
+
 app.use(createPinia());
 app.use(router);
 app.use(vuetify);
