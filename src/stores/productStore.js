@@ -25,6 +25,7 @@ export const useProductStore = defineStore('product', () => {
 
   const getProductCategories = async () => {
     categories.value = await network.get('products/categories');
+    console.log('stoooooooore', categories.value);
   };
 
   return {

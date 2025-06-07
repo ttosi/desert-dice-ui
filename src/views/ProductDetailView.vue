@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <div v-if="product" class="container mx-auto mt-3">
+  <section class="mx-4">
+    <div v-if="product" class="container mx-auto">
       <div class="py-6">
         <div class="flex flex-col lg:flex-row gap-6">
           <div class="">
@@ -70,18 +70,13 @@
         </div>
       </div>
     </div>
-    <div class="text-center ma-2">
-      <v-snackbar v-model="snackbar" location="top right" color="desert-dark">
-        <template v-slot:actions>
-          <div class="text-desert-light flex justify-center font-bold ml-3 mr-3">
-            <mdicon class="text-cactus-medium mr-2" name="check-decagram" />
-            Awesome! Item has been added to your cart
-          </div>
-          <v-btn class="bg-desert-light" color="desert-dark" variant="tonal" to="/cart">
-            Go To Cart
-          </v-btn>
-        </template>
-      </v-snackbar>
+    <div
+      ref="toast"
+      class="flex hidden fixed items-center rounded-lg top-22 right-3 text-center bg-desert-dark">
+      <div class="p-3 text-desert-light flex justify-center font-bold ml-1 mr-3">
+        <mdicon class="text-cactus-medium mr-2" name="check-decagram" />
+        Awesome! Added to your cart
+      </div>
     </div>
   </section>
 </template>
@@ -97,7 +92,7 @@ const imageBaseUrl = import.meta.env.VITE_IMAGES_BASE_URL;
 const mainImage = ref(null);
 const currentImage = ref(null);
 const selectedOption = ref('');
-const snackbar = ref(false);
+const toast = ref(null);
 
 const productStore = useProductStore();
 const { product } = storeToRefs(productStore);
@@ -121,7 +116,10 @@ const isSold = (option) => {
 };
 
 const addToCart = () => {
-  snackbar.value = true;
+  toast.value.classList.remove('hidden');
+  setTimeout(() => {
+    toast.value.classList.add('hidden');
+  }, 2000);
   console.log(selectedOption.value);
 };
 

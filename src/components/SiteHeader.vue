@@ -1,74 +1,45 @@
 <template>
-  <header>
-    <v-app-bar app color="desert-dark font-[Cinzel]" class="text-desert-light">
-      <v-app-bar-nav-icon @click="drawer = !drawer" class="d-sm-none">
+  <nav class="bg-desert-dark font-[Cinzel] text-desert-light shadow-md sticky top-0 z-50">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <RouterLink to="/">
+        <div class="font-bold text-xl md:text-2xl">Desert Dice Company</div>
+      </RouterLink>
+      <button
+        @click="showMenu = !showMenu"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center rounded-lg md:hidden">
         <mdicon name="menu"></mdicon>
-      </v-app-bar-nav-icon>
-      <v-toolbar-title class="ml-6">
-        <RouterLink to="/">
-          <div class="flex items-center">
-            <!-- <div class="text-desert-light font-bold text-2xl">Desert Dice Company</div> -->
-            <div><img src="@/assets/logos/small_saguaro.svg" /></div>
-            <div class="relative text-desert-meduim-dark font-bold text-2xl -left-2">
-              Desert Dice Company
-            </div>
-          </div>
-        </RouterLink>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <div class="d-none d-sm-flex mr-5">
-        <v-btn
-          v-for="category in categories"
-          :key="category.id"
-          :to="`/products/${category.route}`">
-          <span class="font-bold text-lg">{{ category.name }}</span>
-        </v-btn>
+      </button>
+      <div class="w-full md:block md:w-auto" :class="{ hidden: !showMenu }">
+        <ul class="menu">
+          <li v-for="category in categories" :key="category.id">
+            <RouterLink :to="category.route">
+              <button class="menu-item">{{ category.name }}</button>
+            </RouterLink>
+          </li>
+          <li class="menu-item relative">
+            <mdicon name="cart" size="27" />
+          </li>
+        </ul>
       </div>
-      <v-btn to="/cart" :active="false" class="mr-3">
-        <span class="font-bold text-lg">
-          <mdicon name="numeric-1-circle" class="absolute -top-1.5 right-2" />
-          <mdicon name="cart" size="27" />
-        </span>
-      </v-btn>
-    </v-app-bar>
-    <!-- * mobile -->
-    <v-navigation-drawer v-model="drawer" temporary class="d-sm-none">
-      <v-list>
-        <v-list-item
-          v-for="category in categories"
-          :key="category.id"
-          :to="`/products/${category.route}`">
-          <v-list-item-title>
-            <div class="text-desert-dark text-xl font-bold">
-              {{ category.name }}
-            </div>
-          </v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </header>
+    </div>
+  </nav>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { RouterLink } from 'vue-router';
 import { storeToRefs } from 'pinia';
+import { RouterLink } from 'vue-router';
 import { useProductStore } from '@/stores/productStore';
+
+const showMenu = ref(false);
 
 const productStore = useProductStore();
 const { categories } = storeToRefs(productStore);
 const { getProductCategories } = productStore;
-
-const drawer = ref(false);
 
 onMounted(async () => {
   await getProductCategories();
 });
 </script>
 
-<style scoped>
-.no-active-class {
-  background-color: transparent !important;
-  color: inherit !important;
-}
-</style>
+<style scoped></style>

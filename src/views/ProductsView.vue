@@ -62,12 +62,11 @@ const { products, categories } = storeToRefs(productStore);
 const { getProductsByCategory } = productStore;
 
 const currentCategory = computed(() => {
-  return categories.value.find((c) => c.route === route.params.category);
+  return categories.value.find((c) => c.code === route.params.category);
 });
 
 watchEffect(async () => {
   await getProductsByCategory(route.params.category);
-  console.log(products.value);
 });
 </script>
 
