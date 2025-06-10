@@ -22,6 +22,12 @@ const network = {
     const { data } = await useSecureFetch(`${baseUrl}/${endpoint}`);
     return JSON.parse(data.value);
   },
+  async post(endpoint, data) {
+    await useSecureFetch(`${baseUrl}/${endpoint}`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
 };
 
 // const post = async () => {};

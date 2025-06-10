@@ -17,7 +17,13 @@
             </RouterLink>
           </li>
           <li class="menu-item relative">
-            <mdicon name="cart" size="27" />
+            <RouterLink to="/cart">
+              <mdicon
+                v-if="cart.length"
+                :name="`numeric-${cart.length}-circle`"
+                class="absolute -top-0.5 left-6 md:left-7" />
+              <mdicon name="cart" size="27" />
+            </RouterLink>
           </li>
         </ul>
       </div>
@@ -30,12 +36,16 @@ import { ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { RouterLink } from 'vue-router';
 import { useProductStore } from '@/stores/productStore';
+import { useCartStore } from '@/stores/cartStore';
 
 const showMenu = ref(false);
 
 const productStore = useProductStore();
 const { categories } = storeToRefs(productStore);
 const { getProductCategories } = productStore;
+
+const cartStore = useCartStore();
+const { cart } = storeToRefs(cartStore);
 
 onMounted(async () => {
   await getProductCategories();

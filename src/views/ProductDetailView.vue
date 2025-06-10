@@ -39,64 +39,74 @@
               <div class="text-desert-dark font-[Cinzel] text-2xl font-bold mb-5">
                 ${{ selectedOption?.price?.toFixed(2) }}
               </div>
-              <form class="max-w-sm">
+              <div class="max-w-sm">
                 <div v-if="product.options.length > 1">
                   <label class="block mb-1 text-sm font-bold">Options</label>
                   <select v-model="selectedOption">
                     <option
-                      v-for="option in availableOptions"
+                      v-for="option in product.options"
                       :key="option.id"
                       :value="option"
-                      :disabled="isSold(option)"
-                      :class="{ 'option-sold': isSold(option) }"
                       class="mr-5">
-                      <span v-if="isSold(option)">SOLD</span>
                       {{ option.name }} - ${{ option.price.toFixed(2) }}
                     </option>
                   </select>
                 </div>
                 <div class="mb-6 mt-1 italic">
-                  <div v-if="selectedOption.notes">
+                  <div v-if="selectedOption?.notes">
                     {{ selectedOption.notes }}
                   </div>
                 </div>
-                <RouterLink to="" class="button-primary mt-9" @click="addToCart">
-                  Add to Cart
-                </RouterLink>
-              </form>
+                <button class="button-primary" @click="addToCart">Add to Cart</button>
+              </div>
             </div>
-            <div class="flex space-x-4 my-6"></div>
           </div>
         </div>
       </div>
     </div>
-    <div
-      ref="toast"
-      class="flex hidden fixed items-center rounded-lg top-22 right-3 text-center bg-desert-dark">
-      <div class="p-3 text-desert-light flex justify-center font-bold ml-1 mr-3">
-        <mdicon class="text-cactus-medium mr-2" name="check-decagram" />
-        Awesome! Added to your cart
+    <button>Open Modal</button>
+    <BaseModal
+      :show="isOpen"
+      title="Item has been added to your cart!"
+      @close="close"
+      @confirm="handleConfirm">
+      <div class="flex gap-3">
+        <button class="button-primary" @click="router.push('/products/dice')">
+          Continue Shopping
+        </button>
+        <button class="button-primary" @click="router.push('/cart')">Go To Cart</button>
       </div>
-    </div>
+    </BaseModal>
   </section>
 </template>
 
 <script setup>
-import { computed, ref, watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRoute } from 'vue-router';
 import { useProductStore } from '@/stores/productStore';
+import { useCartStore } from '@/stores/cartStore';
+import { useModal } from '@/composables/useModal';
+import router from '@/router';
+import BaseModal from '@/components/BaseModal.vue';
 
 const route = useRoute();
 const imageBaseUrl = import.meta.env.VITE_IMAGES_BASE_URL;
 const mainImage = ref(null);
 const currentImage = ref(null);
-const selectedOption = ref('');
-const toast = ref(null);
+const selectedOption = ref();
 
 const productStore = useProductStore();
-const { product } = storeToRefs(productStore);
-const { getProduct } = productStore;
+const { product, products, invalidateCache } = storeToRefs(productStore);
+const { getProduct, markProductSold } = productStore;
+
+const cartStore = useCartStore();
+const { cart } = storeToRefs(cartStore);
+
+const { isOpen, open, close } = useModal();
+
+// TODO: if product store,
+// fetch it (handles page refresh by user)
 
 const changeImage = (thumbnail) => {
   const fullImage = thumbnail.replace('-thumbnail', '');
@@ -104,23 +114,34 @@ const changeImage = (thumbnail) => {
   currentImage.value = fullImage;
 };
 
-const availableOptions = computed(() => {
-  const chonkSold = product.value.options.some((o) => o.hasChonk && o.isSold);
-  const options = product.value.options?.filter((o) => !(chonkSold && o.hasChonk));
-  return options;
-});
+const addToCart = async () => {
+  open();
 
-const isSold = (option) => {
-  const chonkSold = product.value.options.some((o) => o.hasChonk && o.isSold);
-  return chonkSold && option.hasChonk;
+  cart.value.push({
+    product: product.value,
+    option: selectedOption.value,
+  });
+
+  invalidateCache.value = true;
+  products.value.find((p) => p.id === product.value.id).isSold = true;
+  await markProductSold({
+    id: product.value.id,
+  });
+
+  // butterup.toast({
+  //   theme: 'butterupcustom',
+  //   message: `You’ve reserved the ${product.value.name} set. Complete checkout soon to make it yours!`,
+  //   location: 'top-center',
+  //   toastLife: 3000,
+  //   dismissable: true,
+  //   onTimeout: function () {
+  //     router.push('/cart');
+  //   },
+  // });
 };
 
-const addToCart = () => {
-  toast.value.classList.remove('hidden');
-  setTimeout(() => {
-    toast.value.classList.add('hidden');
-  }, 2000);
-  console.log(selectedOption.value);
+const handleConfirm = () => {
+  console.log('hanlde confirm');
 };
 
 watchEffect(async () => {

@@ -1,8 +1,8 @@
-import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
+import { useStorage } from '@vueuse/core';
 
 export const useCartStore = defineStore('cart', () => {
-  const cart = ref([]);
+  const cart = useStorage('cart', []);
 
   return {
     cart,

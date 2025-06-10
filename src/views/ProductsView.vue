@@ -2,18 +2,18 @@
   <section id="shop" class="mt-8">
     <div class="container mx-auto">
       <div class="flex flex-col md:flex-row mt-4">
-        <div id="filters" class="w-full md:w-1/5 p-4 hidden md:block mr-10">
+        <div id="filters" class="w-full md:w-1/5 p-4 md:block mr-10">
           <div class="text-desert-dark text-3xl font-bold font-[Cinzel] mt-1 mb-2">
             {{ currentCategory?.name }}
           </div>
-          <div class="mb-6 pb-8 text-lg/7 italic">
-            {{ currentCategory.description }}
+          <div class="mb-6 text-lg/7 md:block sm:text-md italic">
+            {{ currentCategory?.description }}
           </div>
         </div>
         <div class="w-full md:w-4/5 p-4">
           <div v-if="products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div
-              v-for="product in products"
+              v-for="product in availableProducts"
               :key="product.id"
               class="bg-white rounded-lg shadow shadow-slate-400">
               <div class="" style="padding: 15px">
@@ -34,8 +34,8 @@
           </div>
           <div v-else>
             <div class="mt-3 mb-4">
-              Nothing here right now! Check back, or even better, sign up to get notified. You won't
-              be dissapointed.
+              <div class="font-bold">Nothing here at the moment.</div>
+              Check back or sign up to get notified when new dice sets are added to the store.
             </div>
             <button type="button" class="button-primary">
               Notify Me When Products Become Available
@@ -63,6 +63,10 @@ const { getProductsByCategory } = productStore;
 
 const currentCategory = computed(() => {
   return categories.value.find((c) => c.code === route.params.category);
+});
+
+const availableProducts = computed(() => {
+  return products.value.filter((p) => !p.isSold);
 });
 
 watchEffect(async () => {

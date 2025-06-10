@@ -15,6 +15,10 @@
           dark:hover:bg-desert-medium-dark focus:outline-none cursor-pointer;
 }
 
+.button-disabled {
+  @apply bg-slate-300 text-slate-200 cursor-auto hover:bg-slate-300;
+}
+
 .menu {
   @apply font-bold text-xl flex flex-col p-2 md:p-0 mt-1 border rounded-lg text-desert-dark md:text-desert-light
         md:flex-row md:space-x-2 md:mt-0 md:border-0 bg-desert-light md:bg-desert-dark;
@@ -36,3 +40,16 @@ select {
   @apply cursor-pointer font-bold border focus:ring-desert-dark
   border-desert-dark text-sm rounded-lg block w-full p-3;
 }
+
+.select-disabled {
+  @apply bg-slate-300 text-slate-200 cursor-auto border-slate-400;
+}
+
+/* butterup toast */
+.butteruptoast.butterupcustom {
+  @apply bg-desert-light text-desert-dark text-lg border-none w-96;
+}
+
+/* #butterupToast-1 > div > div.toast-buttons > button {
+  @apply bg-desert-dark;
+} */
