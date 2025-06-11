@@ -22,15 +22,43 @@
               </div>
               <div>{{ item.option.name }}</div>
               <div class="font-bold mt-2.5">${{ item.option.price.toFixed(2) }}</div>
-              <div>
+              <!-- <div>
                 Quantity: 1
                 <span class="italic">(unique item!)</span>
+              </div> -->
+
+              <div class="max-w-[8rem]">
+                <label for="quantity-input" class="block text-sm font-medium">
+                  Choose quantity:
+                </label>
+                <div class="relative flex items-center">
+                  <button
+                    type="button"
+                    @click="quantityDecrease"
+                    class="border border-desert-light bg-desert-dark text-desert-light rounded-s-lg px-3 h-11 cursor-pointer">
+                    <mdicon name="minus" />
+                  </button>
+                  <input
+                    type="text"
+                    class="bg-desert-dark border border-desert-light text-slate-300 text-center text-sm block w-full px-6 h-11 py-2.5"
+                    placeholder="1" />
+                  <button
+                    type="button"
+                    @click="quantityIncrease"
+                    class="border border-desert-light bg-desert-dark text-desert-light rounded-e-lg px-3 h-11 focus:outline-none cursor-pointer">
+                    <mdicon name="plus" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
           <div class="italic text-justify">
             Because these items are unqique, they will stay in your cart for 15 minutes before being
             automatically removed so that other customers have a chance to purchase them.
+            <input
+              type="text"
+              class="bg-desert-dark border border-desert-light text-desert-light text-center text-sm block w-full px-6 h-11 py-2.5"
+              placeholder="1" />
           </div>
         </div>
         <div class="flex-col h-full w-full md:max-w-2/5 shadow shadow-slate-500 rounded-md mb-4">
