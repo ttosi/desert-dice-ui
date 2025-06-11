@@ -44,12 +44,3 @@ select {
 .select-disabled {
   @apply bg-slate-300 text-slate-200 cursor-auto border-slate-400;
 }
-
-/* butterup toast */
-.butteruptoast.butterupcustom {
-  @apply bg-desert-light text-desert-dark text-lg border-none w-96;
-}
-
-/* #butterupToast-1 > div > div.toast-buttons > button {
-  @apply bg-desert-dark;
-} */

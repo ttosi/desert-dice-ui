@@ -127,17 +127,6 @@ const addToCart = async () => {
   await markProductSold({
     id: product.value.id,
   });
-
-  // butterup.toast({
-  //   theme: 'butterupcustom',
-  //   message: `You’ve reserved the ${product.value.name} set. Complete checkout soon to make it yours!`,
-  //   location: 'top-center',
-  //   toastLife: 3000,
-  //   dismissable: true,
-  //   onTimeout: function () {
-  //     router.push('/cart');
-  //   },
-  // });
 };
 
 const handleConfirm = () => {
