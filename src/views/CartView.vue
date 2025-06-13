@@ -14,20 +14,20 @@
             <div class="w-full flex-col text-md">
               <div class="flex justify-between">
                 <div class="font-bold text-lg">{{ item.product.name }}</div>
-                <mdicon
-                  name="trash-can"
-                  size="20"
+                <Icon
+                  icon="mdi:trash-can"
+                  height="22"
                   class="text-slate-500 mr-2 mt-2 cursor-pointer"
                   @click="remove(item.product.id, item.option.id)" />
               </div>
               <div>{{ item.option.name }}</div>
               <div class="font-bold mt-2.5">${{ item.option.price.toFixed(2) }}</div>
-              <!-- <div>
+              <div>
                 Quantity: 1
-                <span class="italic">(unique item!)</span>
-              </div> -->
+                <span class="italic">(unique item)</span>
+              </div>
 
-              <div class="max-w-[8rem]">
+              <!-- <div class="max-w-[8rem]">
                 <label for="quantity-input" class="block text-sm font-medium">
                   Choose quantity:
                 </label>
@@ -36,7 +36,6 @@
                     type="button"
                     @click="quantityDecrease"
                     class="border border-desert-light bg-desert-dark text-desert-light rounded-s-lg px-3 h-11 cursor-pointer">
-                    <mdicon name="minus" />
                   </button>
                   <input
                     type="text"
@@ -46,19 +45,13 @@
                     type="button"
                     @click="quantityIncrease"
                     class="border border-desert-light bg-desert-dark text-desert-light rounded-e-lg px-3 h-11 focus:outline-none cursor-pointer">
-                    <mdicon name="plus" />
                   </button>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="italic text-justify">
-            Because these items are unqique, they will stay in your cart for 15 minutes before being
-            automatically removed so that other customers have a chance to purchase them.
-            <input
-              type="text"
-              class="bg-desert-dark border border-desert-light text-desert-light text-center text-sm block w-full px-6 h-11 py-2.5"
-              placeholder="1" />
+            Unqique items will be removed from your cart after 2 hours
           </div>
         </div>
         <div class="flex-col h-full w-full md:max-w-2/5 shadow shadow-slate-500 rounded-md mb-4">
@@ -95,6 +88,7 @@
 import { useCartStore } from '@/stores/cartStore';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
+import { Icon } from '@iconify/vue';
 
 const imageBaseUrl = import.meta.env.VITE_IMAGES_BASE_URL;
 const shippingCost = import.meta.env.VITE_FLAT_RATE_SHIPPIN_COST;

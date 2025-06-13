@@ -7,7 +7,7 @@
       <button
         @click="showMenu = !showMenu"
         class="inline-flex items-center p-2 w-10 h-10 justify-center rounded-lg md:hidden">
-        <mdicon name="menu"></mdicon>
+        <Icon icon="mdi:menu" height="25" />
       </button>
       <div class="w-full md:block md:w-auto" :class="{ hidden: !showMenu }">
         <ul class="menu">
@@ -18,11 +18,12 @@
           </li>
           <li class="menu-item relative">
             <RouterLink to="/cart">
-              <mdicon
+              <Icon
                 v-if="cart.length"
-                :name="`numeric-${cart.length}-circle`"
-                class="absolute -top-0.5 left-6 md:left-7" />
-              <mdicon name="cart" size="27" />
+                :icon="`mdi:numeric-${cart.length}-circle`"
+                height="22"
+                class="hidden md:block absolute top-0 md:left-6" />
+              <Icon icon="mdi:cart" height="25" />
             </RouterLink>
           </li>
         </ul>
@@ -35,6 +36,7 @@
 import { ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { RouterLink } from 'vue-router';
+import { Icon } from '@iconify/vue';
 import { useProductStore } from '@/stores/productStore';
 import { useCartStore } from '@/stores/cartStore';
 
