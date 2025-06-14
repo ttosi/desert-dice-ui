@@ -7,7 +7,7 @@
           <div
             v-for="item in cart"
             :key="item.product.id"
-            class="shadow shadow-slate-400 flex rounded-lg p-2 gap-3 mb-4">
+            class="shadow shadow-slate-400 flex rounded-lg p-2 gap-3 mb-2">
             <img
               class="max-h-28 rounded-lg"
               :src="`${imageBaseUrl}/${item.product.thumbnails[0]}`" />
@@ -51,7 +51,7 @@
             </div>
           </div>
           <div class="italic text-justify">
-            Unqique items will be removed from your cart after 2 hours
+            (Unique items will be removed from your cart after 2 hours.)
           </div>
         </div>
         <div class="flex-col h-full w-full md:max-w-2/5 shadow shadow-slate-500 rounded-md mb-4">
@@ -86,15 +86,18 @@
 
 <script setup>
 import { useCartStore } from '@/stores/cartStore';
+import { useProductStore } from '@/stores/productStore';
+
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { Icon } from '@iconify/vue';
 
 const imageBaseUrl = import.meta.env.VITE_IMAGES_BASE_URL;
-const shippingCost = import.meta.env.VITE_FLAT_RATE_SHIPPIN_COST;
+const shippingCost = import.meta.env.VITE_FLAT_RATE_SHIPPING_COST;
 
 const cartStore = useCartStore();
 const { cart } = storeToRefs(cartStore);
+const { updateProduct } = useProductStore();
 
 const subtotal = computed(() => {
   return cart.value.reduce((acc, o) => acc + o.option.price, 0);
@@ -106,6 +109,10 @@ const total = computed(() => {
 
 const remove = (productId) => {
   cart.value = cart.value.filter((p) => p.product.id !== productId);
+
+  updateProduct(productId, {
+    reservedAt: null,
+  });
 };
 </script>
 

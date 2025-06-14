@@ -8,7 +8,7 @@
         <div class="w-full sm:w-1/3 px-4 mb-8" v-for="product in featured" :key="product.id">
           <div
             class="category-banner relative overflow-hidden rounded-lg shadow-lg group object-cover">
-            <img :src="`/src/assets/${product.path}`" class="" />
+            <img :src="`${imageBaseUrl}/${product.path}`" />
             <div class="absolute inset-0 bg-gray-light bg-opacity-50"></div>
           </div>
         </div>
@@ -18,6 +18,8 @@
 </template>
 
 <script setup>
+const imageBaseUrl = import.meta.env.VITE_IMAGES_BASE_URL;
+
 defineProps({
   title: String,
   category: String,
@@ -26,9 +28,9 @@ defineProps({
 
 /* featured mock data */
 const featured = [
-  { id: 1, name: 'Cool Dice Name 1', path: 'dice/20250420_091540.jpg' },
-  { id: 2, name: 'Cool Dice Name 2', path: 'dice/20250316_143711.jpg' },
-  { id: 3, name: 'Cool Dice Name 3', path: 'dice/20250102_162901.jpg' },
+  { id: 1, name: 'Cool Dice Name 1', path: 'dice/20250601_172248.png' },
+  { id: 2, name: 'Cool Dice Name 2', path: 'dice/20250601_111213.png' },
+  { id: 3, name: 'Cool Dice Name 3', path: 'dice/20250601_111213.png' },
 ];
 </script>
 

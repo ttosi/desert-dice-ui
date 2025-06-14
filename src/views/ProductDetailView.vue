@@ -97,16 +97,13 @@ const currentImage = ref(null);
 const selectedOption = ref();
 
 const productStore = useProductStore();
-const { product, products, invalidateCache } = storeToRefs(productStore);
-const { getProduct, markProductSold } = productStore;
+const { product, invalidateCache } = storeToRefs(productStore);
+const { getProduct, updateProduct } = productStore;
 
 const cartStore = useCartStore();
 const { cart } = storeToRefs(cartStore);
 
 const { isOpen, open, close } = useModal();
-
-// TODO: if product store,
-// fetch it (handles page refresh by user)
 
 const changeImage = (thumbnail) => {
   const fullImage = thumbnail.replace('-thumbnail', '');
@@ -123,14 +120,15 @@ const addToCart = async () => {
   });
 
   invalidateCache.value = true;
-  products.value.find((p) => p.id === product.value.id).isSold = true;
-  await markProductSold({
-    id: product.value.id,
+
+  // reserve this product - in a cart but not sold
+  await updateProduct(product.value.id, {
+    reservedAt: new Date().toISOString(),
   });
 };
 
 const handleConfirm = () => {
-  console.log('hanlde confirm');
+  console.log('handle confirm');
 };
 
 watchEffect(async () => {

@@ -8,7 +8,7 @@ const useSecureFetch = createFetch({
     async beforeFetch({ options }) {
       options.headers.Authorization = `Bearer ${API_TOKEN}`;
       options.headers['Content-Type'] = 'application/json';
-      options.headers['Access-Control-Allow-Methods'] = 'GET, POST';
+      options.headers['Access-Control-Allow-Methods'] = 'GET, POST, PATCH';
       return { options };
     },
   },
@@ -25,6 +25,13 @@ const network = {
   async post(endpoint, data) {
     await useSecureFetch(`${baseUrl}/${endpoint}`, {
       method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+  async patch(endpoint, data) {
+    console.log(endpoint, data);
+    await useSecureFetch(`${baseUrl}/${endpoint}`, {
+      method: 'PATCH',
       body: JSON.stringify(data),
     });
   },

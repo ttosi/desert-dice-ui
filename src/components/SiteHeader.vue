@@ -6,6 +6,7 @@
       </RouterLink>
       <button
         @click="showMenu = !showMenu"
+        ref="menubutton"
         class="inline-flex items-center p-2 w-10 h-10 justify-center rounded-lg md:hidden">
         <Icon icon="mdi:menu" height="25" />
       </button>
@@ -36,11 +37,14 @@
 import { ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { RouterLink } from 'vue-router';
+import { onClickOutside } from '@vueuse/core';
 import { Icon } from '@iconify/vue';
+
 import { useProductStore } from '@/stores/productStore';
 import { useCartStore } from '@/stores/cartStore';
 
 const showMenu = ref(false);
+const menubutton = ref();
 
 const productStore = useProductStore();
 const { categories } = storeToRefs(productStore);
@@ -48,6 +52,8 @@ const { getProductCategories } = productStore;
 
 const cartStore = useCartStore();
 const { cart } = storeToRefs(cartStore);
+
+onClickOutside(menubutton, () => (showMenu.value = false));
 
 onMounted(async () => {
   await getProductCategories();

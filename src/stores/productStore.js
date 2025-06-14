@@ -20,6 +20,7 @@ export const useProductStore = defineStore('product', () => {
     }
 
     const data = await network.get(`products/category/${category}`);
+
     cachedProducts.value.set(category, data);
     products.value = data;
     invalidateCache.value = false;
@@ -29,9 +30,9 @@ export const useProductStore = defineStore('product', () => {
     categories.value = await network.get('products/categories');
   };
 
-  const markProductSold = async (data) => {
-    console.log(data);
-    await network.post('products/marksold', data);
+  // TODO - make secure
+  const updateProduct = async (id, data) => {
+    await network.patch(`products/${id}`, data);
   };
 
   return {
@@ -39,7 +40,7 @@ export const useProductStore = defineStore('product', () => {
     product,
     categories,
     getProduct,
-    markProductSold,
+    updateProduct,
     getProductsByCategory,
     getProductCategories,
     invalidateCache,
