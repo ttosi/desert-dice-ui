@@ -7,6 +7,7 @@ export const useProductStore = defineStore('product', () => {
   const product = ref();
   const cachedProducts = ref(new Map());
   const categories = ref([]);
+  const tags = ref([]);
   const invalidateCache = ref(false);
 
   const getProduct = async (id) => {
@@ -30,6 +31,11 @@ export const useProductStore = defineStore('product', () => {
     categories.value = await network.get('products/categories');
   };
 
+  const getProductTags = async (category) => {
+    tags.value = await network.get(`products/category/${category}/tags`);
+    console.log('store', tags.value);
+  };
+
   // TODO - make secure
   const updateProduct = async (id, data) => {
     await network.patch(`products/${id}`, data);
@@ -39,10 +45,12 @@ export const useProductStore = defineStore('product', () => {
     products,
     product,
     categories,
+    tags,
     getProduct,
     updateProduct,
     getProductsByCategory,
     getProductCategories,
+    getProductTags,
     invalidateCache,
   };
 });

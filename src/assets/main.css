@@ -44,3 +44,7 @@ select {
 .select-disabled {
   @apply bg-slate-300 text-slate-200 cursor-auto border-slate-400;
 }
+
+.badge {
+  @apply absolute top-1.5 right-1.5 bg-desert-light text-desert-dark text-sm me-2 px-2.5 py-0.5 rounded-sm;
+}

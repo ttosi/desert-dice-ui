@@ -4,31 +4,25 @@
       <div class="py-6">
         <div class="flex flex-col lg:flex-row gap-6">
           <div class="">
-            <div class="grid gap-4">
-              <div
-                id="main-image-container"
-                class="max-w-[500px] rounded-lg shadow shadow-slate-400">
-                <img
-                  ref="mainImage"
-                  class="h-auto w-full max-w-[500px] rounded-lg object-cover object-center md:h-[480px]"
-                  style="padding: 5px"
-                  :src="`${imageBaseUrl}/${product?.images[0]}`"
-                  alt="Main Product Image" />
-              </div>
-              <div class="grid grid-cols-5 gap-4">
-                <div
-                  v-for="thumbnail in product.thumbnails
-                    .slice()
-                    .sort((a, b) => a.sequence - b.sequence)"
-                  :key="thumbnail"
-                  @click="changeImage(thumbnail)"
-                  :class="{
-                    'thumbnail-active': currentImage === thumbnail.replace('-thumbnail', ''),
-                  }">
-                  <img :src="`${imageBaseUrl}/${thumbnail}`" class="thumbnail" />
-                </div>
-              </div>
-            </div>
+            <Carousel id="gallery" v-bind="galleryConfig" v-model="currentSlide">
+              <Slide v-for="(image, index) in product.images" :key="index">
+                <img :src="`${imageBaseUrl}/${image}`" class="gallery-image" />
+              </Slide>
+            </Carousel>
+            <Carousel id="thumbnails" v-bind="thumbnailsConfig" v-model="currentSlide">
+              <Slide v-for="(image, index) in product.images" :key="index">
+                <template #default="{ currentIndex, isActive }">
+                  <div
+                    :class="['thumbnail', { 'is-active': isActive }]"
+                    @click="slideTo(currentIndex)">
+                    <img :src="`${imageBaseUrl}/${image}`" class="thumbnail-image" />
+                  </div>
+                </template>
+              </Slide>
+              <template #addons>
+                <Navigation />
+              </template>
+            </Carousel>
           </div>
           <div class="w-full lg:w-full flex flex-col justify-between">
             <div class="pb-8">
@@ -64,7 +58,6 @@
         </div>
       </div>
     </div>
-    <button>Open Modal</button>
     <BaseModal
       :show="isOpen"
       title="Item has been added to your cart!"
@@ -83,32 +76,45 @@
 <script setup>
 import { ref, watchEffect } from 'vue';
 import { storeToRefs } from 'pinia';
+import router from '@/router';
 import { useRoute } from 'vue-router';
+import 'vue3-carousel/carousel.css';
+import { Carousel, Slide, Navigation } from 'vue3-carousel';
+
 import { useProductStore } from '@/stores/productStore';
 import { useCartStore } from '@/stores/cartStore';
 import { useModal } from '@/composables/useModal';
-import router from '@/router';
 import BaseModal from '@/components/BaseModal.vue';
 
-const route = useRoute();
 const imageBaseUrl = import.meta.env.VITE_IMAGES_BASE_URL;
-const mainImage = ref(null);
-const currentImage = ref(null);
 const selectedOption = ref();
+const currentSlide = ref(0);
 
+const route = useRoute();
 const productStore = useProductStore();
+const cartStore = useCartStore();
+
 const { product, invalidateCache } = storeToRefs(productStore);
 const { getProduct, updateProduct } = productStore;
-
-const cartStore = useCartStore();
 const { cart } = storeToRefs(cartStore);
-
 const { isOpen, open, close } = useModal();
 
-const changeImage = (thumbnail) => {
-  const fullImage = thumbnail.replace('-thumbnail', '');
-  mainImage.value.src = `${imageBaseUrl}/${fullImage}`;
-  currentImage.value = fullImage;
+const slideTo = (nextSlide) => (currentSlide.value = nextSlide);
+
+const galleryConfig = {
+  itemsToShow: 1,
+  wrapAround: false,
+  slideEffect: 'fade',
+  mouseDrag: false,
+  touchDrag: false,
+};
+
+const thumbnailsConfig = {
+  height: 120,
+  itemsToShow: 3,
+  wrapAround: false,
+  touchDrag: true,
+  gap: 10,
 };
 
 const addToCart = async () => {
@@ -121,7 +127,7 @@ const addToCart = async () => {
 
   invalidateCache.value = true;
 
-  // reserve this product - in a cart but not sold
+  // reserve product - in cart, not sold
   await updateProduct(product.value.id, {
     reservedAt: new Date().toISOString(),
   });
@@ -136,7 +142,6 @@ watchEffect(async () => {
   await getProduct(route.params.id);
 
   selectedOption.value = product.value.options[0];
-  currentImage.value = product.value.images[0];
 });
 </script>
 
@@ -144,5 +149,42 @@ watchEffect(async () => {
 .option-sold {
   color: #aaa;
   font-style: italic;
+}
+
+:root {
+  background-color: #242424;
+}
+
+.carousel {
+  --vc-nav-background: rgba(255, 255, 255, 0.7);
+  --vc-nav-border-radius: 100%;
+}
+
+img {
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-image {
+  border-radius: 16px;
+}
+
+#thumbnails {
+  margin-top: 10px;
+}
+
+.thumbnail {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.thumbnail.is-active,
+.thumbnail:hover {
+  opacity: 1;
 }
 </style>
