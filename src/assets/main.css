@@ -48,3 +48,7 @@ select {
 .badge {
   @apply absolute top-1.5 right-1.5 bg-desert-light text-desert-dark text-sm me-2 px-2.5 py-0.5 rounded-sm;
 }
+
+.form-input {
+  @apply border-slate-300 block  justify-center mb-2 p-2 border rounded-md;
+}

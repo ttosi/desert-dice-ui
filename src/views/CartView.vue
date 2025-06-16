@@ -72,9 +72,11 @@
               <div>${{ total.toFixed(2) }}</div>
             </div>
             <div class="flex justify-center w-full mt-14">
-              <button class="w-full bg-desert-dark text-desert-light rounded-md p-2">
-                Checkout
-              </button>
+              <RouterLink to="/checkout">
+                <button class="w-full bg-desert-dark text-desert-light rounded-md p-2">
+                  Checkout
+                </button>
+              </RouterLink>
             </div>
           </div>
         </div>
