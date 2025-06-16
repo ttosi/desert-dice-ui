@@ -2,18 +2,10 @@
   <section id="shop" class="mt-8">
     <div class="container mx-auto">
       <div class="flex flex-col md:flex-row mt-4">
-        <div id="filters" class="w-full md:w-1/5 p-4 md:block hidden mr-10">
-          <div class="mb-6 pb-8 border-b border-gray-line">
+        <div v-if="tags?.length" id="filters" class="w-full md:w-1/5 p-3 md:block hidden mr-10">
+          <div class="mb-7 pb-8 border-b border-gray-line">
             <h3 class="text-xl font-bold font-[Cinzel] text-desert-dark mb-6 mt-1.5">Filters</h3>
             <div class="space-y-2 ml-2">
-              <!-- <label class="flex items-center">
-                <input
-                  v-model="selectedTags"
-                  value="all"
-                  type="checkbox"
-                  class="form-checkbox custom-checkbox" />
-                <span class="ml-2">All</span>
-              </label> -->
               <label v-for="tag in tags" :key="tag.id" class="flex items-center">
                 <input
                   v-model="selectedTags"
@@ -91,16 +83,24 @@ const currentCategory = computed(() => {
 });
 
 const availableProducts = computed(() => {
-  // return products.filter((product) =>
-  //   product.tags.some((tag) => selectedTags.value.includes(tag.code))
-  // );
-  return products.value.filter((p) => !p.isSold);
+  if (selectedTags.value.length === 0) {
+    return products.value.filter((p) => !p.isSold);
+  }
+
+  return products.value.filter(
+    (p) => p.tags.some((t) => selectedTags.value.includes(t)) && !p.isSold
+  );
+  // console.log(tg);
+  // //  const t = products.value.filter((p) =>
+  // //   p.tags.some((tag) => selectedTags.value.includes(tag.code))
+  // // );
+  // // console.log('filtered', t, 'selected', selectedTags.value);
+  // return products.value.filter((p) => !p.isSold);
 });
 
 watchEffect(async () => {
   await getProductsByCategory(route.params.category);
   await getProductTags(route.params.category);
-  console.log(tags);
 });
 </script>
 

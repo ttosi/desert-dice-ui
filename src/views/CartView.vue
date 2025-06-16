@@ -23,10 +23,9 @@
               <div>{{ item.option.name }}</div>
               <div class="font-bold mt-2.5">${{ item.option.price.toFixed(2) }}</div>
               <div>
-                Quantity: 1
-                <span class="italic">(unique item)</span>
+                Quantity: 1 {{ item.isUnique }}
+                <span v-if="item.isUnique" class="italic">(unique item)</span>
               </div>
-
               <!-- <div class="max-w-[8rem]">
                 <label for="quantity-input" class="block text-sm font-medium">
                   Choose quantity:
@@ -50,8 +49,8 @@
               </div> -->
             </div>
           </div>
-          <div class="italic text-justify">
-            (Unique items will be removed from your cart after 2 hours.)
+          <div class="italic text-justify text-sm">
+            Unique items will be removed from your cart after 2 hours
           </div>
         </div>
         <div class="flex-col h-full w-full md:max-w-2/5 shadow shadow-slate-500 rounded-md mb-4">

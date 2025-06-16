@@ -33,7 +33,6 @@ export const useProductStore = defineStore('product', () => {
 
   const getProductTags = async (category) => {
     tags.value = await network.get(`products/category/${category}/tags`);
-    console.log('store', tags.value);
   };
 
   // TODO - make secure

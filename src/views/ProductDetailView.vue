@@ -179,7 +179,7 @@ img {
   height: 100%;
   width: 100%;
   cursor: pointer;
-  opacity: 0.6;
+  opacity: 1;
   transition: opacity 0.3s ease-in-out;
 }
 
