@@ -90,12 +90,6 @@ const availableProducts = computed(() => {
   return products.value.filter(
     (p) => p.tags.some((t) => selectedTags.value.includes(t)) && !p.isSold
   );
-  // console.log(tg);
-  // //  const t = products.value.filter((p) =>
-  // //   p.tags.some((tag) => selectedTags.value.includes(tag.code))
-  // // );
-  // // console.log('filtered', t, 'selected', selectedTags.value);
-  // return products.value.filter((p) => !p.isSold);
 });
 
 watchEffect(async () => {

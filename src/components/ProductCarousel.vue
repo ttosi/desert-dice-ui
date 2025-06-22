@@ -2,12 +2,12 @@
   <div>
     <div class="carousel__wrapper">
       <Carousel ref="carousel" v-bind="carouselConfig">
-        <Slide v-for="item in carouselItems" :key="item.id">
+        <Slide v-for="item in carouselItems" :key="item.id" class="light-to-dark">
           <img class="w-full" :src="`${imageBaseUrl}/${item.path}`" />
         </Slide>
-        <template #addons>
+        <!-- <template #addons>
           <Navigation />
-        </template>
+        </template> -->
       </Carousel>
     </div>
   </div>
@@ -31,11 +31,16 @@ const carouselConfig = {
 };
 
 const carouselItems = [
-  { id: 1, path: 'banners/1000000716.png' },
-  { id: 2, path: 'banners/1000000713.png' },
-  { id: 3, path: 'banners/1000000714.png' },
-  { id: 4, path: 'banners/1000000712.png' },
+  { id: 1, path: 'banners/set3.png' },
+  // { id: 2, path: 'banners/1000000713.png' },
+  // { id: 3, path: 'banners/1000000714.png' },
+  // { id: 4, path: 'banners/1000000712.png' },
 ];
 </script>
 
-<style scoped></style>
+<style scoped>
+.light-to-dark {
+  background: #fbdb93;
+  background: linear-gradient(90deg, rgba(251, 219, 147, 1) 0%, rgba(100, 27, 46, 1) 60%);
+}
+</style>

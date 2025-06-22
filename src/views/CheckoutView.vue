@@ -7,10 +7,13 @@
       id="payment-form"
       class="mt-5 md:ml-7 flex flex-col md:flex-row md:space-x-8"
       @submit.prevent="handleSubmit">
-      <!-- Shipping Form Section -->
       <div class="flex md:w-1/2 border mx-5 rounded-lg border-slate-300">
-        <fieldset class="mb-6 p-4 rounded border-0 w-full">
-          <div class="flex flex-col md:flex-row md:gap-1 md:justify-between mb-3">
+        <fieldset class="p-4 rounded border-0 w-full">
+          <div class="flex flex-col md:gap-1">
+            <label>Email Address</label>
+            <input required placeholder="Email Address" class="form-input w-full" />
+          </div>
+          <div class="flex flex-col md:flex-row md:gap-1 md:justify-between">
             <div class="flex flex-col w-full md:w-1/2">
               <label>First Name</label>
               <input required placeholder="First Name" class="form-input w-full" />
@@ -53,17 +56,20 @@
         Payment Details
       </legend>
       <div id="payment-element"></div>
-      <button
-        id="submit"
-        type="submit"
-        :disabled="loading || !stripe"
-        class="mt-4 px-4 py-2 bg-blue-600 text-white rounded">
-        {{ loading ? 'Processing…' : 'Pay' }}
-      </button>
-      <div v-if="errorMessage" class="text-red-600 mt-2">
-        {{ errorMessage }}
+      <div class="flex justify-between mb-5">
+        <button
+          id="submit"
+          type="submit"
+          :disabled="loading || !stripe"
+          class="mt-4 px-4 py-2 bg-desert-dark text-desert-light font-bold rounded-md w-1/3 h-12 cursor-pointer">
+          {{ loading ? 'Processing…' : 'Checkout' }}
+        </button>
+        <!-- <div v-if="errorMessage" class="text-red-600 mt-2">
+          {{ errorMessage }}
+        </div> -->
+        <!-- </div> -->
+        <img src="@/assets/logos/stripe-powered.png" class="w-80 mt-4" />
       </div>
-      <!-- </div> -->
     </form>
   </div>
 </template>
@@ -86,7 +92,7 @@ onMounted(async () => {
   const res = await fetch(`${baseUrl}/create-payment-intent`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ amount: 2000 }), // $20.00
+    body: JSON.stringify({ amount: 2000 }),
   });
 
   const { clientSecret } = await res.json();
@@ -105,7 +111,7 @@ const handleSubmit = async () => {
   const { error } = await stripe.value.confirmPayment({
     elements: elements.value,
     confirmParams: {
-      return_url: window.location.href, // you can customize if needed
+      return_url: window.location.href,
     },
     redirect: 'if_required',
   });

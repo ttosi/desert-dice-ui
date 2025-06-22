@@ -13,7 +13,12 @@
               :src="`${imageBaseUrl}/${item.product.thumbnails[0]}`" />
             <div class="w-full flex-col text-md">
               <div class="flex justify-between">
-                <div class="font-bold text-lg">{{ item.product.name }}</div>
+                <div class="flex justify-start items-center">
+                  <div class="font-bold text-lg">{{ item.product.name }}</div>
+                  <div v-if="environment !== 'prod'" class="ml-2 text-slate-600 text-sm">
+                    (pid: {{ item.product.id }}, oid: {{ item.option.id }} )
+                  </div>
+                </div>
                 <Icon
                   icon="mdi:trash-can"
                   height="22"
@@ -72,10 +77,8 @@
               <div>${{ total.toFixed(2) }}</div>
             </div>
             <div class="flex justify-center w-full mt-14">
-              <RouterLink to="/checkout">
-                <button class="w-full bg-desert-dark text-desert-light rounded-md p-2">
-                  Checkout
-                </button>
+              <RouterLink to="/checkout" class="w-full">
+                <button class="button-primary w-full">Checkout</button>
               </RouterLink>
             </div>
           </div>
@@ -93,6 +96,8 @@ import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { Icon } from '@iconify/vue';
 
+const environment = import.meta.env.VITE_ENVIRONMENT;
+console.log('-------', environment);
 const imageBaseUrl = import.meta.env.VITE_IMAGES_BASE_URL;
 const shippingCost = import.meta.env.VITE_FLAT_RATE_SHIPPING_COST;
 
