@@ -1,41 +1,71 @@
-# desert-dice-ui
+# Desert Dice UI
 
-This template should help get you started developing with Vue 3 in Vite.
+Frontend for [Desert Dice Company](https://desertdiceco.com)
 
-## Recommended IDE Setup
+Built using Vue 3, Tailwind CSS, and Vite. Optimized for desktop and mobile shopping with Stripe integration and a smooth checkout flow.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Customize configuration
+## 🧰 Tech Stack
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- **Vue 3** + **Pinia** for state management
+- **TailwindCSS** for styling
+- **Vite** for blazing-fast dev and builds
+- **Vue Router** for navigation
+- **Stripe.js** for secure payments
+- **Vue 3 Carousel** for featured products
 
-## Project Setup
+---
 
-```sh
-npm install
+## 🏗️ Project Structure
+
+```
+desert-dice-ui/
+├── public/                   # Static files (favicon, etc.)
+├── src/
+│   ├── assets/               # Images and CSS
+│   ├── components/           # Shared UI components
+│   ├── pages/                # Page views (Home, Checkout, etc.)
+│   ├── router/               # Vue Router setup
+│   ├── services/             # API wrappers
+│   ├── stores/               # Pinia stores
+│   ├── App.vue               # Root component
+│   └── main.js               # App bootstrapping
+├── vite.config.js
+└── index.html
 ```
 
-### Compile and Hot-Reload for Development
+---
 
-```sh
-npm run dev
+## 📦 Scripts
+
+```bash
+npm run dev           # Start dev server
+npm run build:dev     # Build using development config
+npm run build:staging # Build for staging
+npm run build:prod    # Build for production
 ```
 
-### Compile and Minify for Production
+---
 
-```sh
-npm run build
-```
+## 🔐 Stripe Integration
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+Uses `@stripe/stripe-js` and `vue-stripe-js` to securely collect payment details during checkout.
 
-```sh
-npm run test:unit
-```
+- No card data touches your backend
+- Stripe keys are injected via `.env` on the backend
 
-### Lint with [ESLint](https://eslint.org/)
+---
 
-```sh
-npm run lint
-```
+## 🧪 Dev Notes
+
+- `vue3-carousel` used for banner/featured sections
+- Custom Cinzel fonts and icon packs via `@iconify/vue`
+- Tailwind + responsive layout utilities used throughout
+- Cart stored in local storage — no login system
+
+---
+
+## 📝 License
+
+MIT © Desert Dice Company
