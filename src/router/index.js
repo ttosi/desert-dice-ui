@@ -32,11 +32,11 @@ const router = createRouter({
       name: 'checkout',
       component: () => import('@/views/CheckoutView.vue'),
     },
-    // {
-    //   path: '/checkout2',
-    //   name: 'checkout',
-    //   component: () => import('@/views/CheckoutView2.vue'),
-    // },
+    {
+      path: '/checkoutsuccess',
+      name: 'checkoutsuccess',
+      component: () => import('@/views/CheckoutSuccessView.vue'),
+    },
     {
       path: '/contact',
       name: 'contact',
